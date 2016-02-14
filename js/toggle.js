@@ -68,8 +68,17 @@ $('#search_engine').change(function(){
 });
 
 // 名言警句
-$.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=", function(a) {
-	$(".quote").append(a[0].content + "<p>— " + a[0].title + "</p>")
+// $.getJSON("http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=", function(a) {
+	// $(".quote").append(a[0].content + "<p>— " + a[0].title + "</p>")
+// });
+// set timeout
+$.ajax({
+	url: "http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&callback=",
+	context: $(".quote"),
+	success: function(a) {
+		$(this).append(a[0].content + "<p>— " + a[0].title + "</p>");
+	},
+	timeout: 1000
 });
 
 // 搜索框默认文字
