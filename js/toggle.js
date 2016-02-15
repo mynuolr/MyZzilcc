@@ -4,7 +4,7 @@ if(typeof Cookies.get('type') === "undefined")
 if(typeof Cookies.get('search_engine') === "undefined")
 	Cookies.set('search_engine', 'baidu', {expires: 365, path: '/'});
 if($(window).width() < $(window).height()) // 竖屏
-	$('#sakura').hide(0);
+	$('#sakura').remove();
 
 // 显示按钮文字
 switch(Cookies.get('type')) {
@@ -12,11 +12,19 @@ switch(Cookies.get('type')) {
 		$('.toggle').attr("value", "Love");
 		$('#myzzilcc').show(0);
 		$('#tools').hide(0);
+		$('#notebooks').hide(0);
 		break;
 	case "tools":
 		$('.toggle').attr("value", "Tools");
 		$('#myzzilcc').hide(0);
 		$('#tools').show(0);
+		$('#notebooks').hide(0);
+		break;
+	case "notebooks":
+		$('.toggle').attr("value", "Notebooks");
+		$('#myzzilcc').hide(0);
+		$('#tools').hide(0);
+		$('#notebooks').show(0);
 		break;
 }
 
@@ -38,16 +46,24 @@ $('.toggle').click(function() {
 	switch(Cookies.get('type')) {
 		case "love": // 如果当前状态是love
 			$('.toggle').attr("value", "Tools");
-			Cookies.set('type', 'tools', {expires: 365, path: '/'});
-			$('#myzzilcc').hide(300);
-			$('#tools').show(0);
+			Cookies.set('type', 'tools', {expires: 365, path: '/'}); // 切换到tools
+			$('#myzzilcc').hide(0);
+			$('#tools').show(300);
+			$('#notebooks').hide(0);
 			break;
 		case "tools": // 如果当前状态是tools
+			$('.toggle').attr("value", "Notebooks");
+			Cookies.set('type', 'notebooks', {expires: 365, path: '/'}); // 切换到notebooks
+			$('#myzzilcc').hide(0);
+			$('#tools').hide(0);
+			$('#notebooks').show(300);
+			break;
+		case "notebooks":
 			$('.toggle').attr("value", "Love");
-			Cookies.set('type', 'love', {expires: 365, path: '/'});
+			Cookies.set('type', 'love', {expires: 365, path: '/'}); // 切换到love
 			$('#myzzilcc').show(300);
 			$('#tools').hide(0);
-			break;
+			$('#notebooks').hide(0);
 	}
 });
 
