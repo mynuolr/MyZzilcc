@@ -23,6 +23,7 @@ switch(Cookies.get('type')) {
 		$('#notebooks').hide(0);
 		break;
 	case "notebooks":
+		$('#sakura').hide();
 		$('#toggle').attr("value", "Notebooks");
 		$('#myzzilcc').hide(0);
 		$('#tools').hide(0);
@@ -59,8 +60,10 @@ $('#toggle').click(function() {
 			$('#myzzilcc').hide(0);
 			$('#tools').hide(0);
 			$('#notebooks').show(300);
+			$('#sakura').hide();
 			break;
 		case "notebooks":
+			$('#sakura').show();
 			$('#toggle').attr("value", "Love");
 			Cookies.set('type', 'love', {expires: 365, path: '/'}); // 切换到love
 			$('#myzzilcc').show(300);
@@ -203,7 +206,7 @@ function notebooks() {
 						'</div>'
 					);
 					$('#userinfo').append(
-						'<div class="write_button"><button class="button" id="write">Write.</button></div>'
+						'<div class="write_button"><button class="button" id="refresh">Refresh.</button><button class="button" id="write">Write.</button></div>'
 					);
 					if(a.posts_cnt < posts_per_page) $('#nextp').hide();
 					if(Cookies.get('posts_start') == '0') $('#prevp').hide();
@@ -211,6 +214,10 @@ function notebooks() {
 					$('.post').click(function(){
 						Cookies.set('notebooks', 'read');
 						Cookies.set('post_id', $(this).attr('data-postid'));
+						notebooks();
+					});
+
+					$("#refresh").click(function() {
 						notebooks();
 					});
 
@@ -363,7 +370,7 @@ function notebooks() {
 				'<div class="center">' +
 					'<button class="button" id="write_return">Return</button>' +
 					'<button class="button" id="write_submit">Submit</button>' +
-				'</div>'
+				'</div><p id="submit_status" class="center"></p>'
 			);
 
 			$('#write_return').click(function() {
@@ -382,6 +389,7 @@ function notebooks() {
 					data: {username: Cookies.get('username'), password: Cookies.get('password'), content: $('#post_content').val(), postdate: $('#post_date').val()},
 					dataType: "json"
 				});
+				$('#submit_status').text('Submit...Please Wait..')
 			});
 
 			setInterval(function() {
