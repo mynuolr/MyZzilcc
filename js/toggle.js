@@ -103,13 +103,13 @@ $.ajax({
 });
 
 // 搜索框默认文字
-$('#search').val('I am here waiting for you...');
+$('#search').val('You are my zzilcc.');
 $('#search').focus(function() {
-	if($('#search').val() == 'I am here waiting for you...') $('#search').val('');
+	if($('#search').val() == 'You are my zzilcc.') $('#search').val('');
 });
 
 $('#search').blur(function() {
-	if($('#search').val() == '') $('#search').val('I am here waiting for you...');
+	if($('#search').val() == '') $('#search').val('You are my zzilcc.');
 });
 
 // Notebooks 页面
