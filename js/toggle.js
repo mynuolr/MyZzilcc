@@ -5,8 +5,6 @@ if(typeof Cookies.get('search_engine') === "undefined")
 	Cookies.set('search_engine', 'baidu', {expires: 365, path: '/'});
 if(typeof Cookies.get('notebooks') === "undefined")
 	Cookies.set('notebooks', 'login', {expires: 365, path: '/'});
-if($(window).width() < $(window).height()) // 竖屏
-	$('#sakura').remove();
 
 // 显示按钮文字
 switch(Cookies.get('type')) {
@@ -60,10 +58,8 @@ $('#toggle').click(function() {
 			$('#myzzilcc').hide(0);
 			$('#tools').hide(0);
 			$('#notebooks').show(300);
-			$('#sakura').hide();
 			break;
 		case "notebooks":
-			$('#sakura').show();
 			$('#toggle').attr("value", "Love");
 			Cookies.set('type', 'love', {expires: 365, path: '/'}); // 切换到love
 			$('#myzzilcc').show(300);
