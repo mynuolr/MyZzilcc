@@ -178,6 +178,17 @@ function notebooks() {
 				'<div id="posts_list" class="posts_list">' +
 				'</div>'
 			);
+			$('#userinfo').append(
+				'<div class="write_button"><button class="button" id="logout">Logout.</button><button class="button" id="refresh">Refresh.</button><button class="button" id="write">Write.</button></div>'
+			);
+
+			$("#logout").click(function() {
+				Cookies.set('notebooks', 'login');
+				notebooks();
+			});
+			$("#refresh").click(function() {
+				notebooks();
+			});
 			$.ajax({
 				url: api+"?posts_list&start="+Cookies.get('posts_start')+'&cnt='+posts_per_page,
 				success: function(a) {
@@ -201,9 +212,6 @@ function notebooks() {
 							'<button class="button" id="nextp">Next.</button>' +
 						'</div>'
 					);
-					$('#userinfo').append(
-						'<div class="write_button"><button class="button" id="refresh">Refresh.</button><button class="button" id="write">Write.</button></div>'
-					);
 					if(a.posts_cnt < posts_per_page) $('#nextp').hide();
 					if(Cookies.get('posts_start') == '0') $('#prevp').hide();
 					// 事件检测，点击读取内容，因为是异步处理，所以需要在回调函数中执行。
@@ -213,9 +221,6 @@ function notebooks() {
 						notebooks();
 					});
 
-					$("#refresh").click(function() {
-						notebooks();
-					});
 
 					$("#nextp").click(function() {
 						Cookies.set('posts_start', parseInt(Cookies.get('posts_start'))+posts_per_page);
@@ -230,8 +235,7 @@ function notebooks() {
 					$('#write').click(function(){
 						Cookies.set('notebooks', 'write');
 						notebooks();
-					})
-
+					});
 				},
 				type: "POST",
 				data: {username: Cookies.get('username'), password: Cookies.get('password')},
