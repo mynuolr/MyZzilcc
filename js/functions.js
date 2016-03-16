@@ -335,12 +335,12 @@ function notebooks() {
 			};
 
 			// 2s保存一下
-			// setInterval(function() {
-				// if(Cookies.get('notebooks') == "modify") {
-					// localStorage.post_date = $('#modify_post_date').val();
-					// localStorage.content = $('#modify_post_content').val();
-				// }
-			// }, 2000);
+			setInterval(function() {
+				if(Cookies.get('notebooks') == "modify") {
+					localStorage.post_date = $('#modify_post_date').val();
+					localStorage.content = $('#modify_post_content').val();
+				}
+			}, 2000);
 
 			$('#notebooks').append(
 				'<div class="center">' +
@@ -390,12 +390,12 @@ function notebooks() {
 				console.log(this.$txt.html());
 			};
 
-			// setInterval(function() {
-				// if(Cookies.get('notebooks') == "write") {
-					// localStorage.write_time = $('#post_date').val();
-					// localStorage.write_content = $('#post_content').val();
-				// }
-			// }, 2000);
+			setInterval(function() {
+				if(Cookies.get('notebooks') == "write") {
+					localStorage.write_time = $('#post_date').val();
+					localStorage.write_content = $('#post_content').val();
+				}
+			}, 2000);
 
 			$('#notebooks').append(
 				'<div class="center">' +

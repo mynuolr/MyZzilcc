@@ -2979,7 +2979,7 @@ _e(function (E, $) {
         // 'insertcode',
         '|',
         'undo',
-        'redo',
+        'redo'
         // 'fullscreen'
     ];
 
