@@ -40,7 +40,6 @@ function post_modify($username, $id, $content, $datetime) {
 	if($query['author'] != $username) return false;
 	else {
 		$content = addslashes($content);
-		$content = str_replace("\n", "<p>", $content);
 		mysqli_query($db, "UPDATE  `posts` SET  `content` =  '$content', `post_date` = '$datetime' WHERE  `posts`.`id` =$id");
 		return true;
 	}
@@ -49,7 +48,6 @@ function post_modify($username, $id, $content, $datetime) {
 function add_post($author, $content, $datetime) {
 	global $db;
 	$content = addslashes($content);
-	$content = str_replace("\n", "<p>", $content);
 	mysqli_query($db, "INSERT INTO `posts` (`id`, `author`, `post_date`, `content`) VALUES (NULL, '$author', '$datetime', '$content')");
 }
 
@@ -69,7 +67,10 @@ function posts_info($start, $cnts) {
 		$posti = mysqli_fetch_assoc($query_posts_info);
 		$posti['content'] = addslashes($posti['content']);
 		$posti['content'] = str_replace("\'", "'", $posti['content']);
-		$posti['content'] = str_replace("<p>", "\\n", $posti['content']);
+		$posti['content'] = str_replace("<p>", "", $posti['content']);
+		$posti['content'] = str_replace("</p>", "", $posti['content']);
+		$posti['content'] = str_replace("<br>", "", $posti['content']);
+		$posti['content'] = str_replace("</br>", "", $posti['content']);
 		if(strlen($posti['content']) > 130) $posti['content'] = mb_strcut($posti['content'], 0, 130, 'utf-8') . '...';
 		$res .= '{' . '"id":"' . $posti['id'] . '", "author":"' . $posti['author'] . '", "avatar":"' . get_avatar($posti['author']) . '", "post_date":"' . $posti['post_date'] . '", "content":"' . $posti['content'] .'"}' . ($i != 1?",\n":"\n");
 	}

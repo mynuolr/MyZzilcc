@@ -317,11 +317,28 @@ function notebooks() {
 			$('#notebooks').append(
 				'<div class="center">' +
 				'Date: <input id="modify_post_date" class="inputbox" value="'+ localStorage.post_date + '"></input><br>' +
-				'Conte:<textarea id="modify_post_content" class="inputbox" rows="20">' +
-					localStorage.content.replace(/<p>/g, '\n') +
-				'</textarea>'+
+				'<div style="width: 90%; padding-left: 5%"><textarea id="modify_post_content" class="inputbox" rows="20">' +
+					localStorage.content +
+				'</textarea></div>'+
 				'</div>'
 			);
+
+			var editor = new wangEditor('modify_post_content');
+			editor.onchange = function() {
+				localStorage.write_time = $('#post_date').val();
+				localStorage.write_content = this.$txt.html();
+				console.log(this.$txt.html());
+			};
+
+			// 2s保存一下
+			// setInterval(function() {
+				// if(Cookies.get('notebooks') == "modify") {
+					// localStorage.post_date = $('#modify_post_date').val();
+					// localStorage.content = $('#modify_post_content').val();
+				// }
+			// }, 2000);
+
+			editor.create();
 			$('#notebooks').append(
 				'<div class="center">' +
 					'<button class="button" id="return">Return</button>' +
@@ -344,13 +361,6 @@ function notebooks() {
 				notebooks();
 			});
 
-			// 2s保存一下
-			setInterval(function() {
-				if(Cookies.get('notebooks') == "modify") {
-					localStorage.post_date = $('#modify_post_date').val();
-					localStorage.content = $('#modify_post_content').val();
-				}
-			}, 2000);
 			break;
 		case "write":
 			if(typeof localStorage.write_time === "undefined" || localStorage.write_time === "undefined") { // 未定义
@@ -361,11 +371,28 @@ function notebooks() {
 			$('#notebooks').append(
 				'<div class="center">' +
 				'Date: <input id="post_date" class="inputbox" value="'+ localStorage.write_time + '"></input><br>' +
-				'Conte:<textarea id="post_content" class="inputbox" rows="20">' +
+				'<div style="width: 90%; padding-left: 5%"><textarea id="post_content" class="inputbox" rows="20">' +
 				localStorage.write_content +
-				'</textarea>'+
+				'</textarea></div>'+
 				'</div>'
 			);
+
+
+			var editor = new wangEditor('post_content');
+			editor.onchange = function() {
+				localStorage.write_time = $('#post_date').val();
+				localStorage.write_content = this.$txt.html();
+				console.log(this.$txt.html());
+			};
+			editor.create();
+
+			// setInterval(function() {
+				// if(Cookies.get('notebooks') == "write") {
+					// localStorage.write_time = $('#post_date').val();
+					// localStorage.write_content = $('#post_content').val();
+				// }
+			// }, 2000);
+
 			$('#notebooks').append(
 				'<div class="center">' +
 					'<button class="button" id="write_return">Return</button>' +
@@ -392,12 +419,6 @@ function notebooks() {
 				$('#submit_status').text('Submit...Please Wait..')
 			});
 
-			setInterval(function() {
-				if(Cookies.get('notebooks') == "write") {
-					localStorage.write_time = $('#post_date').val();
-					localStorage.write_content = $('#post_content').val();
-				}
-			}, 2000);
 
 			break;
 	}
