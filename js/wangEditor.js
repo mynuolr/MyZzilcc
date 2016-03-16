@@ -2948,8 +2948,8 @@ _e(function (E, $) {
 
     // 菜单配置
     E.config.menus = [
-        'source',
-        '|',
+		// 'source',
+        // '|',
         'bold',
         'underline',
         'italic',
@@ -2958,8 +2958,8 @@ _e(function (E, $) {
         'forecolor',
         'bgcolor',
         '|',
-        'quote',
-        'fontfamily',
+        // 'quote',
+        // 'fontfamily',
         'fontsize',
         'head',
         'unorderlist',
@@ -2970,17 +2970,17 @@ _e(function (E, $) {
         '|',
         'link',
         'unlink',
-        'table',
+        // 'table',
         'emotion',
         '|',
         'img',
         'video',
         'location',
-        'insertcode',
+        // 'insertcode',
         '|',
         'undo',
         'redo',
-        'fullscreen'
+        // 'fullscreen'
     ];
 
     // 颜色配置

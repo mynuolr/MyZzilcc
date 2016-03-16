@@ -5,6 +5,7 @@ if(typeof Cookies.get('search_engine') === "undefined")
 	Cookies.set('search_engine', 'baidu', {expires: 365, path: '/'});
 if(typeof Cookies.get('notebooks') === "undefined")
 	Cookies.set('notebooks', 'login', {expires: 365, path: '/'});
+wangEditor.config.mapAK = '01ca71714f96f741aa8fb203d80d7537';
 
 // 显示按钮文字
 switch(Cookies.get('type')) {
@@ -317,13 +318,16 @@ function notebooks() {
 			$('#notebooks').append(
 				'<div class="center">' +
 				'Date: <input id="modify_post_date" class="inputbox" value="'+ localStorage.post_date + '"></input><br>' +
-				'<div style="width: 90%; padding-left: 5%"><textarea id="modify_post_content" class="inputbox" rows="20">' +
+				'<div style="padding-left:5%"><textarea id="modify_post_content" rows="23">' +
 					localStorage.content +
 				'</textarea></div>'+
 				'</div>'
 			);
 
 			var editor = new wangEditor('modify_post_content');
+			editor.config.mapAK = '01ca71714f96f741aa8fb203d80d7537';
+			editor.create();
+
 			editor.onchange = function() {
 				localStorage.write_time = $('#post_date').val();
 				localStorage.write_content = this.$txt.html();
@@ -338,7 +342,6 @@ function notebooks() {
 				// }
 			// }, 2000);
 
-			editor.create();
 			$('#notebooks').append(
 				'<div class="center">' +
 					'<button class="button" id="return">Return</button>' +
@@ -371,20 +374,21 @@ function notebooks() {
 			$('#notebooks').append(
 				'<div class="center">' +
 				'Date: <input id="post_date" class="inputbox" value="'+ localStorage.write_time + '"></input><br>' +
-				'<div style="width: 90%; padding-left: 5%"><textarea id="post_content" class="inputbox" rows="20">' +
+				'<div style="padding-left: 5%"><textarea id="post_content" rows=23>' +
 				localStorage.write_content +
 				'</textarea></div>'+
 				'</div>'
 			);
 
-
 			var editor = new wangEditor('post_content');
+			editor.config.mapAK = '01ca71714f96f741aa8fb203d80d7537';
+			editor.create();
+
 			editor.onchange = function() {
 				localStorage.write_time = $('#post_date').val();
 				localStorage.write_content = this.$txt.html();
 				console.log(this.$txt.html());
 			};
-			editor.create();
 
 			// setInterval(function() {
 				// if(Cookies.get('notebooks') == "write") {
