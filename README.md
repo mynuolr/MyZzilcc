@@ -9,6 +9,7 @@ My Valentine's Day gift to the sweetheart.
 2. ~~增加名言警句(add quotes)~~
 3. ~~增加小型记事本(add notebooks)~~
 4. 增加音乐盒(add musicbox)
-5. ~~编辑器增强(Improve notebooks editor)~~ 
+5. ~~编辑器增强(Improve notebooks editor)~~
+
 ## License
 MIT
