@@ -112,8 +112,8 @@ $('#search').blur(function() {
 // Notebooks 页面
 // login模块
 
-// var api = "http://127.0.0.1/MyZzilcc/api.php";
-var api = "http://myzzilcc.applinzi.com/api.php";
+var api = "api.php";
+// var api = "http://myzzilcc.applinzi.com/api.php";
 var posts_per_page = 5;
 
 function gettime() {
